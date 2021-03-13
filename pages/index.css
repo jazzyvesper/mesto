@@ -19,3 +19,5 @@
 @import url(../blocks/photo-card/__place/photo-card__place.css);
 @import url(../blocks/photo-card/__icon/photo-card__icon.css);
 @import url(../blocks/photo-card/__icon/__icon_active/photo-card__icon_active.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);

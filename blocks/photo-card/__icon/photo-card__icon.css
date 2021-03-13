@@ -3,4 +3,21 @@
   margin: 0;
   padding-right: 20px;
   padding-left: 20px;
+  width: 22px;
+  height: 19px;
+  transition: opacity 0.3s;
+}
+
+.photo-card__icon:hover {
+  opacity: 0.6;
+}
+
+.photo-card__icon:active {
+  padding: 0;
+  margin: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  content: url("../../../images/Union.png");
+  width: 22px;
+  height: 19px;
 }

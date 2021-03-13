@@ -1,9 +1,15 @@
 .profile__addButton {
-  width: 154px;
-  height: 54px;
+  border: 0;
+  width: 150px;
+  height: 50px;
   background-image: url(../../../images/plus.png);
   background-color: #000;
   margin-left: auto;
   align-self: center;
+  border-radius: 2px;
+  transition: opacity 0.3s;
 }
 
+.profile__addButton:hover {
+  opacity: 0.6;
+}

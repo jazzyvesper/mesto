@@ -1,0 +1,31 @@
+.popup__firstname {
+  margin: 0;
+  padding: 0;
+  width: 358px;
+  margin-left: 36px;
+  border: none;
+  margin-bottom: 36px;
+  border-bottom: 1px solid #bcbcc4;
+  padding-bottom: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.popup__firstname::placeholder {
+  font-family: Inter;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.popup__firstname:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #bcbcc4;
+}
+
+.popup__firstname:focus::placeholder {
+  color: transparent;
+}

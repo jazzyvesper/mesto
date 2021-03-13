@@ -4,6 +4,7 @@
   height: 50px;
   background-image: url(../../../images/plus.png);
   background-color: #000;
+  background-repeat: no-repeat;
   margin-left: auto;
   align-self: center;
   border-radius: 2px;
@@ -12,4 +13,16 @@
 
 .profile__addButton:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__addButton {
+    width: 100%;
+    background-image: url(../../../images/Vector.png);
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    background-position: center;
+    margin: 0;
+  }
 }

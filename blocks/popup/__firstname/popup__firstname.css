@@ -29,3 +29,11 @@
 .popup__firstname:focus::placeholder {
   color: transparent;
 }
+
+@media screen and (max-width: 768px) {
+  .popup__firstname {
+    width: 238px;
+    margin-left: 22px;
+    margin-bottom: 30px;
+  }
+}

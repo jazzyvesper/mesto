@@ -8,3 +8,16 @@
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   gap: 17px;
 }
+
+@media screen and (max-width: 1024px) {
+  .photo-card {
+    max-width: 96%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .photo-card {
+    max-width: 92%;
+    gap: 20px;
+  }
+}

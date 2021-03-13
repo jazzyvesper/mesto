@@ -29,3 +29,11 @@
 .popup__profession:focus::placeholder {
   color: transparent;
 }
+
+@media screen and (max-width: 768px) {
+  .popup__profession {
+    width: 238px;
+    margin-left: 22px;
+    margin-bottom: 45px;
+  }
+}

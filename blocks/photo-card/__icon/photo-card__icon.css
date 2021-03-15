@@ -10,6 +10,7 @@
 
 .photo-card__icon:hover {
   opacity: 0.6;
+  cursor: pointer;
 }
 
 .photo-card__icon:active {

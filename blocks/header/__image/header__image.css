@@ -1,4 +1,16 @@
-.header__image {
-    width: 142px;
-    height: 33px;
+.header__logo {
+  width: 142px;
+  height: 33px;
+  margin-bottom: 40px;
+}
+
+.header__logo:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  .header__logo {
+    padding-left: 27px;
+    margin-bottom: 31px;
+  }
 }

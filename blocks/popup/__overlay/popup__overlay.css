@@ -1,5 +1,5 @@
-.popup {
-  display: none;
+.popup__overlay {
+  background-color: rgba(3, 3, 3, 0.5);
   position: absolute;
   top: 0;
   right: 0;

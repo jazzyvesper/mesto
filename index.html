@@ -18,53 +18,53 @@
         <div class="profile__text">
           <div class="profile__column">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button" aria-label="Изменить данные"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" class="profile__add-button" aria-label="Добавить фото"></button>
       </section>
       <section class="photo-grid">
         <article class="photo-card">
           <img class="photo-card__image" src="./images/sentinskii_hram.png" alt="Сентинский храм">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Сентинский храм</h2>
-            <button type="button" class="photo-card__icon"></button>
+            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
           <img class="photo-card__image" src="./images/Elbrus.png" alt="Эльбрус">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Гора Эльбрус</h2>
-            <button type="button" class="photo-card__icon"></button>
+            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
           <img class="photo-card__image" src="./images/Dombay.png" alt="Домбай">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Домбай</h2>
-            <button type="button" class="photo-card__icon"></button>
+            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
           <img class="photo-card__image" src="./images/Обсерватория.png" alt="Обсерватория">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Обсерватория РАН</h2>
-            <button type="button" class="photo-card__icon"></button>
+            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
           <img class="photo-card__image" src="./images/teberda.jpg" alt="Теберда">
           <div class="photo-card__place">
           <h2 class="photo-card__title">Теберда</h2>
-          <button type="button" class="photo-card__icon"></button>
+          <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
           <img class="photo-card__image" src="./images/gumbashi.jpg" alt="Перевал Гумбаши">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Перевал Гумбаши</h2>
-            <button type="button" class="photo-card__icon"></button>
+            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
           </div>
         </article>
       </section>
@@ -74,12 +74,12 @@
     </footer>
     <div class="popup">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="username" class="popup__form">
+        <form name="userdata" class="popup__form">
           <input type="text" class="popup__item popup__item_type_name" name="firstname" placeholder="Жак-Ив Кусто" required>
           <input type="text" class="popup__item popup__item_type_profession" name="profession" placeholder="Исследователь океана" required>
-          <button class="popup__button" type="submit">Сохранить</button>
+          <button class="popup__button" type="submit" aria-label="Сохранить данные">Сохранить</button>
         </form>
       </div>
     </div>

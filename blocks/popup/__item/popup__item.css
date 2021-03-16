@@ -19,16 +19,10 @@
     line-height: 17px;
     color: #000000;
   }
-  
-  .popup__item:focus {
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #bcbcc4;
-  }
-    
-  .popup__item:focus::placeholder {
-    color: transparent;
-  }
+
+  .popup__item:focus { 
+    outline: none; 
+  } 
   
   @media screen and (max-width: 768px) {
     .popup__item {

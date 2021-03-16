@@ -68,22 +68,23 @@
           </div>
         </article>
       </section>
-      <section class="popup">
-        <div class="popup__container">
-          <img class="popup__close" src="./images/CloseIcon.svg" alt="закрыть">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form name="username" class="popup__form">
-            <input type="text" class="popup__firstname" name="firstname" placeholder="Жак-Ив Кусто" required>
-            <input type="text" class="popup__profession" name="profession" placeholder="Исследователь океана" required>
-            <button class="popup__button" type="submit">Сохранить</button>
-          </form>
-        </div>
-      </section>
     </main>
     <footer class="footer">
-      <div class="footer__copyright">&copy;2021 Mesto Russia</div>
+      <p class="footer__copyright">&copy;2021 Mesto Russia</p>
     </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form name="username" class="popup__form">
+          <input type="text" class="popup__item popup__item_type_name" name="firstname" placeholder="Жак-Ив Кусто" required>
+          <input type="text" class="popup__item popup__item_type_profession" name="profession" placeholder="Исследователь океана" required>
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </div>
-<script src="./script/index.js"></script>
+  
+  <script src="./script/index.js"></script>
 </body>
 </html>

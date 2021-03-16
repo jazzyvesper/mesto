@@ -1,0 +1,43 @@
+.popup__item {
+    margin: 0;
+    padding: 0;
+    width: 358px;
+    margin-left: 36px;
+    border: 0;
+    margin-bottom: 36px;
+    border-bottom: 1px solid #bcbcc4;
+    padding-bottom: 12px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+  }
+  
+  .popup__item::placeholder {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+  }
+  
+  .popup__item:focus {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #bcbcc4;
+  }
+    
+  .popup__item:focus::placeholder {
+    color: transparent;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .popup__item {
+      width: 238px;
+      margin-left: 22px;
+      margin-bottom: 30px;
+    }
+
+    .popup__item:last-of-type {
+      margin-bottom: 45px;
+    }
+  }

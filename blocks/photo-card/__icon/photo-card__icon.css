@@ -6,6 +6,7 @@
   width: 22px;
   background-color: #fff;
   transition: opacity 0.3s;
+  outline: 0
 }
 
 .photo-card__icon:hover {
@@ -14,5 +15,6 @@
 }
 
 .photo-card__icon:active {
-  content: url("../../../images/Union.svg");
+  background-image: url('../../../images/Union.svg');
+  border: none;
 }

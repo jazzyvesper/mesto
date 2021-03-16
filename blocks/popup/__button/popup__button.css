@@ -13,6 +13,8 @@
   font-size: 18px;
   line-height: 22px;
   transition: opacity 0.3s;
+  margin-bottom: 37px;
+}
 }
 
 .popup__button:hover {

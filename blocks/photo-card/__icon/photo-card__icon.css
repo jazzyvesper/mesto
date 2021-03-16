@@ -1,24 +1,18 @@
 .photo-card__icon {
-  padding: 0;
-  margin: 0;
-  padding-right: 20px;
-  padding-left: 20px;
+  background-image: url("../../../images/Vector.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0;
   width: 22px;
-  height: 19px;
+  background-color: #fff;
   transition: opacity 0.3s;
 }
 
 .photo-card__icon:hover {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .photo-card__icon:active {
-  padding: 0;
-  margin: 0;
-  padding-right: 20px;
-  padding-left: 20px;
-  content: url("../../../images/Union.png");
-  width: 22px;
-  height: 19px;
+  content: url("../../../images/Union.svg");
 }

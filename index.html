@@ -11,73 +11,73 @@
   <div class="page">
     <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип">
-    <figure class="header__line"></figure>
     </header>
     <main class="content">
       <section class="profile">
         <img class="profile__image" src="./images/researcher.jpg" alt="Кусто">
-        <article class="profile__text">
+        <div class="profile__text">
           <div class="profile__column">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__editButton"></button>
+            <button type="button" class="profile__edit-button"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
-        </article>
-        <button class="profile__addButton"></button>
+        </div>
+        <button type="button" class="profile__add-button"></button>
       </section>
-      <section class="photo-card">
-        <article class="photo-card__content">
+      <section class="photo-grid">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/sentinskii_hram.png" alt="Сентинский храм">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Сентинский храм</h2>
-            <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+            <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
-        <article class="photo-card__content">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/Elbrus.png" alt="Эльбрус">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Гора Эльбрус</h2>
-            <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+            <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
-        <article class="photo-card__content">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/Dombay.png" alt="Домбай">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Домбай</h2>
-            <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+            <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
-        <article class="photo-card__content">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/Обсерватория.png" alt="Обсерватория">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Обсерватория РАН</h2>
-            <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+            <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
-        <article class="photo-card__content">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/teberda.jpg" alt="Теберда">
           <div class="photo-card__place">
           <h2 class="photo-card__title">Теберда</h2>
-          <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+          <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
-        <article class="photo-card__content">
+        <article class="photo-card">
           <img class="photo-card__image" src="./images/gumbashi.jpg" alt="Перевал Гумбаши">
           <div class="photo-card__place">
             <h2 class="photo-card__title">Перевал Гумбаши</h2>
-            <img class="photo-card__icon" src="./images/Vector.svg" alt="лайк">
+            <button type="button" class="photo-card__icon"></button>
           </div>
         </article>
       </section>
       <section class="popup">
-        <div class="popup__overlay"></div>
-        <form class="popup__container">
-          <img class="popup__close" src="./images/CloseIcon.png" alt="закрыть">
+        <div class="popup__container">
+          <img class="popup__close" src="./images/CloseIcon.svg" alt="закрыть">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__firstname" name="firstname" placeholder="Жак-Ив Кусто" required>
-          <input type="text" class="popup__profession" name="profession" placeholder="Исследователь океана" required>
-          <button class="popup__button" type="submit">Сохранить</button>
-        </form>
+          <form name="username" class="popup__form">
+            <input type="text" class="popup__firstname" name="firstname" placeholder="Жак-Ив Кусто" required>
+            <input type="text" class="popup__profession" name="profession" placeholder="Исследователь океана" required>
+            <button class="popup__button" type="submit">Сохранить</button>
+          </form>
+        </div>
       </section>
     </main>
     <footer class="footer">

@@ -1,6 +1,7 @@
 .popup {
   display: none;
   position: absolute;
+  background-color: rgba(3, 3, 3, 0.5);
   top: 0;
   right: 0;
   bottom: 0;

@@ -10,10 +10,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
 }
 
 .popup__profession::placeholder {
-  font-family: Inter;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;

@@ -6,7 +6,7 @@
   width: 22px;
   background-color: #fff;
   transition: opacity 0.3s;
-  outline: 0
+  outline: 0;
 }
 
 .photo-card__icon:hover {

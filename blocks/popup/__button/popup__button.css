@@ -15,7 +15,6 @@
   transition: opacity 0.3s;
   margin-bottom: 37px;
 }
-}
 
 .popup__button:hover {
   opacity: 0.8;

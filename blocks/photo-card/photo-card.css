@@ -1,23 +1,5 @@
 .photo-card {
-  max-width: 880px;
-  margin: 0;
-  padding: 0;
-  margin: auto;
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-  gap: 17px;
-}
-
-@media screen and (max-width: 1024px) {
-  .photo-card {
-    max-width: 96%;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .photo-card {
-    max-width: 92%;
-    gap: 20px;
-  }
+  max-width: 100%;
+  background-color: white;
+  border-radius: 10px;
 }

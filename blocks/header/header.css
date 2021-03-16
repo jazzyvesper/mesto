@@ -5,6 +5,7 @@
   margin: auto;
   margin-top: 40px;
   margin-bottom: 36px;
+  border-bottom: 1px solid rgba(84,84,84,0.7);
 }
 
 @media screen and (max-width: 1024px) {
@@ -16,5 +17,6 @@
 @media screen and (max-width: 450px) {
   .header {
     max-width: 100%;
+    margin-top: 28px;
   }
 }

@@ -27,9 +27,10 @@
       <section class="photo-grid">
         <article class="photo-card">
           <img class="photo-card__image" src="./images/sentinskii_hram.png" alt="Сентинский храм">
+          <button type="button" class="photo-card__icon photo-card__icon_type_basket" aria-label="удалить"></button>
           <div class="photo-card__place">
             <h2 class="photo-card__title">Сентинский храм</h2>
-            <button type="button" class="photo-card__icon" aria-label="лайк"></button>
+            <button type="button" class="photo-card__icon photo-card__icon_type_like" aria-label="лайк"></button>
           </div>
         </article>
         <article class="photo-card">
@@ -84,7 +85,16 @@
       </div>
     </div>
   </div>
-  
+  <template id="photo-card">
+    <article class="photo-card">
+      <img class="photo-card__image" src="./images/sentinskii_hram.png" alt="Сентинский храм">
+      <button type="button" class="photo-card__icon photo-card__icon_type_basket" aria-label="удалить"></button>
+      <div class="photo-card__place">
+        <h2 class="photo-card__title">Сентинский храм</h2>
+        <button type="button" class="photo-card__icon photo-card__icon_type_like" aria-label="лайк"></button>
+      </div>
+    </article>
+  </template>
   <script src="./script/index.js"></script>
 </body>
 </html>

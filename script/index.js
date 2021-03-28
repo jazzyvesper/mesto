@@ -3,6 +3,61 @@ let popup = document.querySelector('.popup');
 let openPopupBtn = document.querySelector('.profile__edit-button');
 let closePopupBtn = document.querySelector('.popup__close')
 let closePopupOverlay = document.querySelector('.popup')
+
+//Реализовано наличия карточек на сайте
+const initialCards = [
+  {
+    name: 'Сентинский храм',
+    link: './images/sentinskii_hram.png'
+  },
+  {
+    name: 'Гора Эльбрус',
+    link: './images/Elbrus.png'
+  },
+  {
+    name: 'Домбай',
+    link: './images/Dombay.png'
+  },
+  {
+    name: 'Обсерватория РАН',
+    link: './images/Обсерватория.png'
+  },
+  {
+    name: 'Теберда',
+    link: './images/teberda.jpg'
+  },
+  {
+    name: 'Перевал Гумбаши',
+    link: './images/gumbashi.jpg'
+  }
+];
+initialCards.forEach(function (item) {
+  const photoCard = document.querySelector('#photo-card').content;
+  const photoGrid = document.querySelector('.photo-grid');
+// клонируем содержимое тега template
+  const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
+// наполняем содержимым
+  photoElement.querySelector('.photo-card__image').src = item.link;
+  photoElement.querySelector('.photo-card__title').textContent = item.name;
+// отображаем на странице
+  photoGrid.append(photoElement);
+});
+
+//открытия и закрытия popup добавления карточек
+const PopupAddCard = document.querySelector('.popup_AddCard');
+const openPopupAddCard = document.querySelector('.profile__add-button');
+const closePopupAddCardBtn = PopupAddCard.querySelector('.popup__close');
+openPopupAddCard.addEventListener('click', openPopupAdd);
+closePopupAddCardBtn.addEventListener('click', closePopupAdd);
+function openPopupAdd() {
+  PopupAddCard.classList.add('popup_opened'); 
+}
+function closePopupAdd() {
+  PopupAddCard.classList.remove('popup_opened');
+}
+
+
+
 //функция открытия popup
 function openPopup() {
   popup.classList.add('popup_opened');

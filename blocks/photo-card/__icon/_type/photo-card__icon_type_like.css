@@ -5,7 +5,7 @@
 }
 
 
-.photo-card__icon_type_like:active {
+.photo-card__icon_type_like-active {
   background-image: url('../../../../images/Union.svg');
   border: none;
 }

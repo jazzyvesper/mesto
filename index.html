@@ -31,7 +31,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;2021 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_type_edit">
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -42,16 +42,23 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_AddCard">
+    <div class="popup popup_type_add-card">
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
         <h2 class="popup__title">Новое место</h2>
         <form name="userdata" class="popup__form">
-          <input type="text" class="popup__item popup__item_type_name" name="firstname" placeholder="Название" required>
-          <input type="text" class="popup__item popup__item_type_profession" name="profession" placeholder="Ссылка на картинку" required>
+          <input type="text" class="popup__item popup__item_type_place" name="firstname" placeholder="Название" required>
+          <input type="text" class="popup__item popup__item_type_link" name="profession" placeholder="Ссылка на картинку" required>
           <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
         </form>
       </div>
+    </div>
+    <div class="popup popup_type_image">
+      <figure class="popup__list">
+        <button type="button" class="popup__close" aria-label="Закрыть форму"></button>
+        <img class="popup__image" src="./images/teberda.jpg" alt="Увеличенное фото">
+        <figcaption class="popup__caption">Название места</figcaption>
+      </figure>
     </div>
   </div>
   <template id="photo-card">

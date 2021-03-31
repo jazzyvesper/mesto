@@ -55,29 +55,37 @@ const initialCards = [
 
 //функция открытия и закрытия popup
 function openPopup(modal) {
-  modal.classList.toggle('popup_opened');
-  nameInput.value = profileNameElement.textContent;
-  jobInput.value = profileJobElement.textContent;
+  modal.classList.add('popup_opened');
+}
+
+function closePopup(modal) {
+  modal.classList.remove('popup_opened');
 }
 
 //отслеживаем событие и запускаем зaкрытие и открытие popup
-openPopupBtn.addEventListener('click', () => openPopup(popupEdit));
-closePopupBtn.addEventListener('click', () => openPopup(popupEdit));
+openPopupBtn.addEventListener('click', () => {
+  openPopup(popupEdit);
+  //заполняем поля формы
+  nameInput.value = profileNameElement.textContent;
+  jobInput.value = profileJobElement.textContent;
+});
+closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
 
 openPopupAddCardBtn.addEventListener('click', () => openPopup(popupAddCard));
-closePopupAddCardBtn.addEventListener('click', () => openPopup(popupAddCard));
+closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
 
 //закрытие изображения 
-closePopupImageBtn.addEventListener('click', () => openPopup(popupImage));
+closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
 function formSubmitHandler (evt) {
   //отмена стандартной отправки формы
   evt.preventDefault();
+   
   // Вставляем новые значения с помощью textContent
   profileNameElement.textContent = nameInput.value;
   profileJobElement.textContent = jobInput.value;
   // закрываем окно формы после отправки
-  openPopup(popupEdit);
+  closePopup(popupEdit);
 }
 
 // Прикрепляем обработчик к форме:
@@ -90,6 +98,7 @@ function insertCard (str){
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
   // наполняем содержимым
   photoElement.querySelector('.photo-card__image').src = str.link;
+  photoElement.querySelector('.photo-card__image').alt = str.name;
   photoElement.querySelector('.photo-card__title').textContent = str.name;
   
   //Реализовано удаление карточек и лайки на странице
@@ -126,7 +135,7 @@ function newAddCardHandler (evt) {
   }];
   photoGrid.prepend(insertCard(popupCardValue[0]));
   // отображаем на странице
-  openPopup(popupAddCard);
+  closePopup(popupAddCard);
   };
   //Прикрепляем обработчик к форме добавления карточек
   popupAddCard.addEventListener('submit', newAddCardHandler);

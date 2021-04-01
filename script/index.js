@@ -37,7 +37,7 @@ const initialCards = [
   },
   {
     name: 'Домбай',
-    link: './images/Dombay.jpg'
+    link: './images/dombay.jpg'
   },
   {
     name: 'Обсерватория РАН',

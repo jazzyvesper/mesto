@@ -77,6 +77,7 @@ closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
 //закрытие изображения 
 closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
+//Изменение данных в профиле
 function formSubmitHandler (evt) {
   //отмена стандартной отправки формы
   evt.preventDefault();
@@ -97,68 +98,49 @@ function insertCard (obj){
   // клонируем содержимое тега template
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
   // наполняем содержимым
-<<<<<<< HEAD
-  photoElement.querySelector('.photo-card__image').src = str.link;
-  photoElement.querySelector('.photo-card__image').alt = str.name;
-  photoElement.querySelector('.photo-card__title').textContent = str.name;
-  
-  //Реализовано удаление карточек и лайки на странице
-  photoElement.addEventListener('click', evt => {
-    const button = evt.target;
-    if(button.classList.contains('photo-card__icon_type_basket')){
-      button.closest('.photo-card').remove();
-    }
-    if(button.classList.contains('photo-card__icon_type_like')){
-      button.classList.toggle('photo-card__icon_type_like-active');
-    }
-    const img = evt.target
-    if(img.classList.contains('photo-card__image')){
-      popupImgHandler();
-    }
-  })
-  // открытие изображения карточки в попапе
-  function popupImgHandler () {
-    imageElement.src = str.link;
-    imageCaption.textContent = str.name;
-    openPopup(popupImage);
-  }
-=======
   photoElement.querySelector('.photo-card__image').src = obj.link;
+  photoElement.querySelector('.photo-card__image').alt = obj.name;
   photoElement.querySelector('.photo-card__title').textContent = obj.name;
->>>>>>> develop
+  
+  //удаление карточки при клике на корзину
+  photoElement.querySelector('.photo-card__icon_type_basket').addEventListener('click', evt => {
+    const button = evt.target;
+    button.closest('.photo-card').remove();
+  })
+
+  //лайки на карточках
+  photoElement.querySelector('.photo-card__icon_type_like').addEventListener('click', evt => {
+    const button = evt.target;
+    button.classList.toggle('photo-card__icon_type_like-active');
+  })
+
+  //Открытие изображения по клику
+  photoElement.querySelector('.photo-card__image').addEventListener('click', evt => {
+    const img = evt.target
+    imageElement.src = img.src
+    imageCaption.textContent = img.alt
+    openPopup(popupImage);
+    console.log('clik')
+  })
+
   return photoElement;
 }
-
-//Реализовано удаление карточек и лайки на странице
-photoElement.addEventListener('click', evt => {
-  const button = evt.target;
-  if(button.classList.contains('photo-card__icon_type_basket')){
-    button.closest('.photo-card').remove();
-  }
-  if(button.classList.contains('photo-card__icon_type_like')){
-    button.classList.toggle('photo-card__icon_type_like-active');
-  }
-  const img = evt.target
-  if(img.classList.contains('photo-card__image')){
-    popupImgHandler();
-  }
-})
 
 //Реализованое добавление новых карточек на страницу
 function newAddCardHandler (evt) {
   //отмена стандартной отправки формы
   evt.preventDefault();
   // создаем псевдомассив из вводимых данных
-  const popupCardValue = [{
+  const popupCardValue = {
    name: placeInput.value,
    link: photoInput.value
-  }];
-  photoGrid.prepend(insertCard(popupCardValue[0]));
+  };
+  photoGrid.prepend(insertCard(popupCardValue));
   // отображаем на странице
   closePopup(popupAddCard);
-  };
-  //Прикрепляем обработчик к форме добавления карточек
-  popupAddCard.addEventListener('submit', newAddCardHandler);
+};
+//Прикрепляем обработчик к форме добавления карточек
+popupAddCard.addEventListener('submit', newAddCardHandler);
 
 //начальные Карточки на странице
 initialCards.forEach(item =>{

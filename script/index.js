@@ -97,25 +97,31 @@ formElement.addEventListener('submit', formSubmitHandler);
 function insertCard (obj){
   // клонируем содержимое тега template
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
+  
+  //находим иконки корзины, лайкаи и изображения
+  const cardDelete = photoElement.querySelector('.photo-card__icon_type_basket');
+  const cardLike = photoElement.querySelector('.photo-card__icon_type_like');
+  const imageModalWindow = photoElement.querySelector('.photo-card__image')
+  
   // наполняем содержимым
   photoElement.querySelector('.photo-card__image').src = obj.link;
   photoElement.querySelector('.photo-card__image').alt = obj.name;
   photoElement.querySelector('.photo-card__title').textContent = obj.name;
   
   //удаление карточки при клике на корзину
-  photoElement.querySelector('.photo-card__icon_type_basket').addEventListener('click', evt => {
+  cardDelete.addEventListener('click', evt => {
     const button = evt.target;
     button.closest('.photo-card').remove();
   })
 
   //лайки на карточках
-  photoElement.querySelector('.photo-card__icon_type_like').addEventListener('click', evt => {
+  cardLike.addEventListener('click', evt => {
     const button = evt.target;
     button.classList.toggle('photo-card__icon_type_like-active');
   })
 
   //Открытие изображения по клику
-  photoElement.querySelector('.photo-card__image').addEventListener('click', evt => {
+  imageModalWindow.addEventListener('click', evt => {
     const img = evt.target
     imageElement.src = img.src
     imageCaption.textContent = img.alt

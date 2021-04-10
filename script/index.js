@@ -101,7 +101,7 @@ function insertCard (obj){
   //находим иконки корзины, лайкаи и изображения
   const cardDelete = photoElement.querySelector('.photo-card__icon_type_basket');
   const cardLike = photoElement.querySelector('.photo-card__icon_type_like');
-  const imageModalWindow = photoElement.querySelector('.photo-card__image')
+  const imageModalWindow = photoElement.querySelector('.photo-card__image');
   
   // наполняем содержимым
   photoElement.querySelector('.photo-card__image').src = obj.link;
@@ -122,9 +122,9 @@ function insertCard (obj){
 
   //Открытие изображения по клику
   imageModalWindow.addEventListener('click', evt => {
-    const img = evt.target
-    imageElement.src = img.src
-    imageCaption.textContent = img.alt
+    const img = evt.target;
+    imageElement.src = img.src;
+    imageCaption.textContent = img.alt;
     openPopup(popupImage);
   })
 

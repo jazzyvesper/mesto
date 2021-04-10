@@ -97,7 +97,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 function insertCard (obj){
   // клонируем содержимое тега template
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
-  
+
   //находим иконки корзины, лайкаи и изображения
   const cardDelete = photoElement.querySelector('.photo-card__icon_type_basket');
   const cardLike = photoElement.querySelector('.photo-card__icon_type_like');
@@ -126,7 +126,6 @@ function insertCard (obj){
     imageElement.src = img.src
     imageCaption.textContent = img.alt
     openPopup(popupImage);
-    console.log('clik')
   })
 
   return photoElement;

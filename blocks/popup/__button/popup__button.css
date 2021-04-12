@@ -1,4 +1,4 @@
-.popup__button {
+/*.popup__button {
   margin: 0;
   padding: 0;
   align-self: center;
@@ -14,13 +14,12 @@
   line-height: 22px;
   transition: opacity 0.3s;
   margin-bottom: 37px;
-}
+}*/
 
 .popup__button:hover {
   opacity: 0.8;
   cursor: pointer;
 }
-
 
 @media screen and (max-width: 768px) {
   .popup__button {

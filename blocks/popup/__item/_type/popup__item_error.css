@@ -1,4 +1,4 @@
-.popup__item_type_error {
+.popup__item_error {
   font-size: 12px;
   line-height: 14px;
   color: #FF0000;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__item_type_text-error {
+  .popup__item_error {
     margin-left: 22px;
     margin-bottom: 10px;
   }

@@ -11,10 +11,10 @@ const closePopupAddCardBtn = popupAddCard.querySelector('.popup__close');
 // Находим изображение и подпись 
 const imageElement = popupImage.querySelector('.popup__image');
 const imageCaption = popupImage.querySelector('.popup__caption');
+
 //находим форму и поля формы в DOM
-const formElement = document.querySelector('.popup_type_edit');
-const nameInput = formElement.querySelector('.popup__item_type_name');
-const jobInput = formElement.querySelector('.popup__item_type_profession');
+const nameInput = popupEdit.querySelector('.popup__item_type_name');
+const jobInput = popupEdit.querySelector('.popup__item_type_profession');
 const profileNameElement = document.querySelector('.profile__title');
 const profileJobElement = document.querySelector('.profile__subtitle');
 
@@ -53,21 +53,51 @@ const initialCards = [
   }
 ];
 
-//функция открытия и закрытия popup
+//функции открытия модального окна
 function openPopup(modal) {
   modal.classList.add('popup_opened');
+  
+  //добавление слушателя при нажатии на клавиатуру  
+  document.addEventListener ('keydown', keyHandler);
+  
+  //заполнение полей данными из профиля при открытии модального окна
+  nameInput.value = profileNameElement.textContent;
+  jobInput.value = profileJobElement.textContent;
+
+  // Очистка полей добавления карточек
+  photoInput.value = "";
+  placeInput.value = "";
 }
 
+// функция закрытия модального окна
 function closePopup(modal) {
   modal.classList.remove('popup_opened');
+  document.removeEventListener ('keydown', keyHandler);
+}
+
+//функция закрытия модального окна при нажатии на Escape
+function keyHandler (evt){
+  if(evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened')
+    closePopup(popupOpened);
+  }
+}
+
+//отслеживаем событие нажатия на клавиатуру и клике и запускаем фунцкцию обработчик
+
+document.addEventListener ('click', overlayHandler);
+
+//закрытие модального окна при клике на оверлэй
+function overlayHandler(evt) {
+  if (evt.target.classList.contains('popup')) {
+    const popupOpened = document.querySelector('.popup_opened')
+    closePopup(popupOpened);
+  }
 }
 
 //отслеживаем событие и запускаем зaкрытие и открытие popup
 openPopupBtn.addEventListener('click', () => {
   openPopup(popupEdit);
-  //заполняем поля формы
-  nameInput.value = profileNameElement.textContent;
-  jobInput.value = profileJobElement.textContent;
 });
 closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
 
@@ -91,7 +121,7 @@ function formSubmitHandler (evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+popupEdit.addEventListener('submit', formSubmitHandler);
 
 // Генерация карточек
 function insertCard (obj){

@@ -36,9 +36,9 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form name="userdata" class="popup__form" novalidate>
           <input type="text" class="popup__item popup__item_type_name" name="first-name" id="first-name" placeholder="Жак-Ив Кусто" required minlength="2" maxlength="40">
-          <span class="first-name-error popup__item_error"></span>
+          <span class="popup__item first-name-error popup__item_type_error"></span>
           <input type="text" class="popup__item popup__item_type_profession" name="profession" id="profession" placeholder="Исследователь океана" required minlength="2" maxlength="40">
-          <span class="profession-error popup__item_error"></span>
+          <span class="popup__item profession-error popup__item_type_error"></span>
           <button class="popup__button" type="submit" aria-label="Сохранить данные">Сохранить</button>
         </form>
       </div>
@@ -49,9 +49,9 @@
         <h2 class="popup__title">Новое место</h2>
         <form name="addcard" class="popup__form" novalidate>
           <input type="text" class="popup__item popup__item_type_place" name="place-name" id="place-name" placeholder="Название" required minlength="2" maxlength="30">
-          <span class="place-name-error popup__item_error"></span>
+          <span class="popup__item place-name-error popup__item_type_error"></span>
           <input type="url" class="popup__item popup__item_type_link" name="place-link" id="place-link" placeholder="Ссылка на картинку" required>
-          <span class="place-link-error popup__item_error"></span>
+          <span class="popup__item place-link-error popup__item_type_error"></span>
           <button class="popup__button" type="submit" aria-label="Создать карточку">Создать</button>
         </form>
       </div>

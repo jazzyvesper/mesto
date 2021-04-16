@@ -19,52 +19,29 @@ const profileNameElement = document.querySelector('.profile__title');
 const profileJobElement = document.querySelector('.profile__subtitle');
 
 //Добавление карточек на страницу
-const addformElement = popupAddCard.querySelector('.popup__form')
+const addformElement = popupAddCard.querySelector('.popup__form');
 const placeInput = addformElement.querySelector('.popup__item_type_place');
 const photoInput = addformElement.querySelector('.popup__item_type_link');
 const photoCard = document.querySelector('#photo-card').content;
 const photoGrid = document.querySelector('.photo-grid');
-
-//Данные для карточек
-const initialCards = [
-  {
-    name: 'Сентинский храм',
-    link: './images/sentinskii-hram.jpg'
-  },
-  {
-    name: 'Гора Эльбрус',
-    link: './images/Elbrus.jpg'
-  },
-  {
-    name: 'Домбай',
-    link: './images/dombay.jpg'
-  },
-  {
-    name: 'Обсерватория РАН',
-    link: './images/Обсерватория.png'
-  },
-  {
-    name: 'Теберда',
-    link: './images/teberda.jpg'
-  },
-  {
-    name: 'Перевал Гумбаши',
-    link: './images/gumbashi.jpg'
-  }
-];
+const addFormInput = addformElement.querySelectorAll('.popup__item');
 
 //функции открытия модального окна
 function openPopup(modal) {
   modal.classList.add('popup_opened');
-  
   //добавление слушателя при нажатии на клавиатуру  
   document.addEventListener ('keydown', keyHandler);
-  
-  //заполнение полей данными из профиля при открытии модального окна
+  document.addEventListener ('click', overlayHandler);
+}
+
+//Функция заполнения полей данными из профиля
+function addProfileData() {
   nameInput.value = profileNameElement.textContent;
   jobInput.value = profileJobElement.textContent;
+}
 
-  // Очистка полей добавления карточек
+//Функция очистки полей добавления карточек
+function removeCardData() {
   photoInput.value = "";
   placeInput.value = "";
 }
@@ -72,42 +49,62 @@ function openPopup(modal) {
 // функция закрытия модального окна
 function closePopup(modal) {
   modal.classList.remove('popup_opened');
+
+  //отслеживаем событие клика и запускаем фунцкцию обработчик
   document.removeEventListener ('keydown', keyHandler);
+  document.removeEventListener ('click', overlayHandler);
 }
 
 //функция закрытия модального окна при нажатии на Escape
 function keyHandler (evt){
   if(evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened')
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
-
-//отслеживаем событие клика и запускаем фунцкцию обработчик
-document.addEventListener ('click', overlayHandler);
 
 //закрытие модального окна при клике на оверлэй
 function overlayHandler(evt) {
   if (evt.target.classList.contains('popup')) {
-    const popupOpened = document.querySelector('.popup_opened')
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
 
-//отслеживаем событие и запускаем зaкрытие и открытие popup
+//функция удаления ошибок
+function RemoveInputError(formElement) {
+  const inputListform = formElement.querySelectorAll('.popup__item');
+  inputListform.forEach((item)=> {
+    hideInputError(formElement, item)
+  })
+}
+
+//отслеживаем клик по редактированию профиля и открываем модальное окно
 openPopupBtn.addEventListener('click', () => {
   openPopup(popupEdit);
+  addProfileData();
+  RemoveInputError(popupEdit);
 });
+
+//отслеживаем клик по крестику и закрываем модальное окно
 closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
 
-openPopupAddCardBtn.addEventListener('click', () => openPopup(popupAddCard));
+//отслеживаем клик по добавлению карточек и открываем модальное окно
+openPopupAddCardBtn.addEventListener('click', () => {
+  openPopup(popupAddCard);
+  removeCardData();
+  RemoveInputError(popupAddCard);
+  setEventListeners(popupAddCard)
+});
+
+//отслеживаем клик по крестику и закрываем модальное окно добавления карточек
 closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
 
-//закрытие изображения 
+//отслеживаем клик по крестику и закрываем модальное окно изображения 
 closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
 //Изменение данных в профиле
-function formSubmitHandler (evt) {
+function formEditProfleSubmitHandler (evt) {
   //отмена стандартной отправки формы
   evt.preventDefault();
    
@@ -120,10 +117,10 @@ function formSubmitHandler (evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-popupEdit.addEventListener('submit', formSubmitHandler);
+popupEdit.addEventListener('submit', formEditProfleSubmitHandler);
 
 // Генерация карточек
-function insertCard (obj){
+function createCard (obj){
   // клонируем содержимое тега template
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
 
@@ -133,8 +130,8 @@ function insertCard (obj){
   const imageModalWindow = photoElement.querySelector('.photo-card__image');
   
   // наполняем содержимым
-  photoElement.querySelector('.photo-card__image').src = obj.link;
-  photoElement.querySelector('.photo-card__image').alt = obj.name;
+  imageModalWindow.src = obj.link;
+  imageModalWindow.alt = obj.name;
   photoElement.querySelector('.photo-card__title').textContent = obj.name;
   
   //удаление карточки при клике на корзину
@@ -161,7 +158,7 @@ function insertCard (obj){
 }
 
 //Реализованое добавление новых карточек на страницу
-function newAddCardHandler (evt) {
+function formAddCardSubmitHandler (evt) {
   //отмена стандартной отправки формы
   evt.preventDefault();
   // создаем псевдомассив из вводимых данных
@@ -169,14 +166,14 @@ function newAddCardHandler (evt) {
    name: placeInput.value,
    link: photoInput.value
   };
-  photoGrid.prepend(insertCard(popupCardValue));
+  photoGrid.prepend(createCard(popupCardValue));
   // отображаем на странице
   closePopup(popupAddCard);
 };
 //Прикрепляем обработчик к форме добавления карточек
-popupAddCard.addEventListener('submit', newAddCardHandler);
+popupAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
 //начальные Карточки на странице
 initialCards.forEach(item =>{
-  photoGrid.append(insertCard(item));
+  photoGrid.append(createCard(item));
 });

@@ -27,7 +27,7 @@ const hideInputError = (formElement, inputElement) => {
 //проверяет валидность поля, внутри вызывает showInputError или hideInputError.
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
-    // Если поле не проходит валидацию, выодим ошибку
+    // Если поле не проходит валидацию, выводим ошибку
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     // Если проходит, скрываем
@@ -78,9 +78,11 @@ function hasInvalidInput(inputList) {
 //функция блокировки кнопки в зависимости от правилно заполненного поля
 function toggleButtonState (inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add(validationConfig.inactiveButtonClass);
     buttonElement.classList.remove(validationConfig.activeButtonClass);
     } else {
+      buttonElement.removeAttribute('disabled');
       buttonElement.classList.remove(validationConfig.inactiveButtonClass);
       buttonElement.classList.add(validationConfig.activeButtonClass);
     }

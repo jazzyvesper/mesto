@@ -72,7 +72,7 @@ function overlayHandler(evt) {
 }
 
 //функция удаления ошибок
-function RemoveInputError(formElement) {
+function removeInputError(formElement) {
   const inputListform = formElement.querySelectorAll('.popup__item');
   inputListform.forEach((item)=> {
     hideInputError(formElement, item)
@@ -120,7 +120,7 @@ function formEditProfleSubmitHandler (evt) {
 popupEdit.addEventListener('submit', formEditProfleSubmitHandler);
 
 // Генерация карточек
-function createCard (obj){
+function createCard (cardData){
   // клонируем содержимое тега template
   const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
 
@@ -130,9 +130,9 @@ function createCard (obj){
   const imageModalWindow = photoElement.querySelector('.photo-card__image');
   
   // наполняем содержимым
-  imageModalWindow.src = obj.link;
-  imageModalWindow.alt = obj.name;
-  photoElement.querySelector('.photo-card__title').textContent = obj.name;
+  imageModalWindow.src = cardData.link;
+  imageModalWindow.alt = cardData.name;
+  photoElement.querySelector('.photo-card__title').textContent = cardData.name;
   
   //удаление карточки при клике на корзину
   cardDelete.addEventListener('click', evt => {

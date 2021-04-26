@@ -52,9 +52,9 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const enableValidation = (obj) => {
+const enableValidation = (validationConfig) => {
   // Найходим все формы в DOM, и создаем из них массив
-  const formList = Array.from(document.querySelectorAll(obj.formSelector));
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   // Обойдём все элементы массива и у каждой формы отменим стандартное поведение
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {

@@ -142,14 +142,14 @@ popupAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
 //начальные Карточки на странице
 initialCards.forEach(item => {
-  const card = new Card(item,'#photo-card');
+  const card = new Card(item,'#photo-card',handleOpenImage);
   const photoElement = card.generateCard();
   document.querySelector('.photo-grid').prepend(photoElement);
 });
 
 
 //функция открытия изображения в модальном окне
-export default function handleOpenImage (alt, link) {
+function handleOpenImage (alt, link) {
   imageElement.src = link;
   imageCaption.textContent = alt;
   openPopup(popupImage);

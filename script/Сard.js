@@ -1,7 +1,5 @@
-import handleOpenImage from './index.js'
-
 export class Card {
-  constructor(cardData, cardSelector) {
+  constructor(cardData, cardSelector, handleOpenImage) {
     this._link = cardData.link;
     this._alt = cardData.name
     this._cardSelector = cardSelector;
@@ -45,5 +43,4 @@ export class Card {
   _handleLikeCard() {
     this._element.querySelector('.photo-card__icon_type_like').classList.toggle('photo-card__icon_type_like-active');
   };
-  
 }

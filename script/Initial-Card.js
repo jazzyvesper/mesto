@@ -1,5 +1,5 @@
 //Данные для карточек
-const initialCards = [
+ const initialCards = [
     {
       name: 'Сентинский храм',
       link: './images/sentinskii-hram.jpg'
@@ -25,3 +25,5 @@ const initialCards = [
       link: './images/gumbashi.jpg'
     }
   ];
+
+  export{initialCards};

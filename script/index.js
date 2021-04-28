@@ -1,3 +1,8 @@
+import {Card} from './Сard.js';
+import {initialCards} from './Initial-Card.js';
+import {FormValidator} from './FormValidator.js';
+import {validationConfig} from './FormValidator.js';
+
 //Находим Popup и его элементы в DOM
 const popupEdit = document.querySelector('.popup_type_edit');
 const openPopupBtn = document.querySelector('.profile__edit-button');
@@ -22,9 +27,7 @@ const profileJobElement = document.querySelector('.profile__subtitle');
 const addformElement = popupAddCard.querySelector('.popup__form');
 const placeInput = addformElement.querySelector('.popup__item_type_place');
 const photoInput = addformElement.querySelector('.popup__item_type_link');
-const photoCard = document.querySelector('#photo-card').content;
 const photoGrid = document.querySelector('.photo-grid');
-const addFormInput = addformElement.querySelectorAll('.popup__item');
 
 //функции открытия модального окна
 function openPopup(modal) {
@@ -55,6 +58,7 @@ function closePopup(modal) {
   document.removeEventListener ('click', overlayHandler);
 }
 
+
 //функция закрытия модального окна при нажатии на Escape
 function keyHandler (evt){
   if(evt.key === 'Escape') {
@@ -75,7 +79,8 @@ function overlayHandler(evt) {
 function removeInputError(formElement) {
   const inputListform = formElement.querySelectorAll('.popup__item');
   inputListform.forEach((item)=> {
-    hideInputError(formElement, item)
+    const errorElement = formElement.querySelector(`.${item.id}-error`);
+    errorElement.textContent = '';
   })
 }
 
@@ -83,7 +88,7 @@ function removeInputError(formElement) {
 openPopupBtn.addEventListener('click', () => {
   openPopup(popupEdit);
   addProfileData();
-  RemoveInputError(popupEdit);
+  removeInputError(popupEdit); 
 });
 
 //отслеживаем клик по крестику и закрываем модальное окно
@@ -93,8 +98,7 @@ closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
 openPopupAddCardBtn.addEventListener('click', () => {
   openPopup(popupAddCard);
   removeCardData();
-  RemoveInputError(popupAddCard);
-  setEventListeners(popupAddCard)
+  removeInputError(popupAddCard);
 });
 
 //отслеживаем клик по крестику и закрываем модальное окно добавления карточек
@@ -119,44 +123,6 @@ function formEditProfleSubmitHandler (evt) {
 // он будет следить за событием “submit” - «отправка»
 popupEdit.addEventListener('submit', formEditProfleSubmitHandler);
 
-// Генерация карточек
-function createCard (cardData){
-  // клонируем содержимое тега template
-  const photoElement = photoCard.querySelector('.photo-card').cloneNode(true);
-
-  //находим иконки корзины, лайкаи и изображения
-  const cardDelete = photoElement.querySelector('.photo-card__icon_type_basket');
-  const cardLike = photoElement.querySelector('.photo-card__icon_type_like');
-  const imageModalWindow = photoElement.querySelector('.photo-card__image');
-  
-  // наполняем содержимым
-  imageModalWindow.src = cardData.link;
-  imageModalWindow.alt = cardData.name;
-  photoElement.querySelector('.photo-card__title').textContent = cardData.name;
-  
-  //удаление карточки при клике на корзину
-  cardDelete.addEventListener('click', evt => {
-    const button = evt.target;
-    button.closest('.photo-card').remove();
-  })
-
-  //лайки на карточках
-  cardLike.addEventListener('click', evt => {
-    const button = evt.target;
-    button.classList.toggle('photo-card__icon_type_like-active');
-  })
-
-  //Открытие изображения по клику
-  imageModalWindow.addEventListener('click', evt => {
-    const img = evt.target;
-    imageElement.src = img.src;
-    imageCaption.textContent = img.alt;
-    openPopup(popupImage);
-  })
-
-  return photoElement;
-}
-
 //Реализованое добавление новых карточек на страницу
 function formAddCardSubmitHandler (evt) {
   //отмена стандартной отправки формы
@@ -166,7 +132,8 @@ function formAddCardSubmitHandler (evt) {
    name: placeInput.value,
    link: photoInput.value
   };
-  photoGrid.prepend(createCard(popupCardValue));
+  const card = new Card(popupCardValue,'#photo-card');
+  photoGrid.prepend(card.generateCard(popupCardValue));
   // отображаем на странице
   closePopup(popupAddCard);
 };
@@ -174,6 +141,20 @@ function formAddCardSubmitHandler (evt) {
 popupAddCard.addEventListener('submit', formAddCardSubmitHandler);
 
 //начальные Карточки на странице
-initialCards.forEach(item =>{
-  photoGrid.append(createCard(item));
+initialCards.forEach(item => {
+  const card = new Card(item,'#photo-card');
+  const photoElement = card.generateCard();
+  document.querySelector('.photo-grid').prepend(photoElement);
 });
+
+
+//функция открытия изображения в модальном окне
+export default function handleOpenImage (alt, link) {
+  imageElement.src = link;
+  imageCaption.textContent = alt;
+  openPopup(popupImage);
+}
+// Создаем экземпляр класса FormValidator для каждой проверяемой формы
+new FormValidator(validationConfig, popupEdit).enableValidation();
+new FormValidator(validationConfig, popupAddCard).enableValidation();
+

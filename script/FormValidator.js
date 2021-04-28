@@ -19,20 +19,7 @@ export class FormValidator {
       return !inputElement.validity.valid;
     })
   }
-
-  //приватный метод блокировки кнопки в зависимости от правилно заполненного поля
-  _toggleButtonState (inputList, buttonElement) {
-  if (this._hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
-    buttonElement.classList.remove(this._validationConfig.activeButtonClass);
-    } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
-      buttonElement.classList.add(this._validationConfig.activeButtonClass);
-    }
-  }
-// приватный метод слушателя на вводимые дданые
+  // приватный метод слушателя на вводимые дданые
   _setEventListeners() {
     const inputList = Array.from(this._formElement.querySelectorAll(validationConfig.inputSelector));
     const buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
@@ -46,6 +33,18 @@ export class FormValidator {
     });
 
   };
+  //приватный метод блокировки кнопки в зависимости от правилно заполненного поля
+  _toggleButtonState (inputList, buttonElement) {
+  if (this._hasInvalidInput(inputList)) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
+    buttonElement.classList.remove(this._validationConfig.activeButtonClass);
+    } else {
+      buttonElement.removeAttribute('disabled');
+      buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
+      buttonElement.classList.add(this._validationConfig.activeButtonClass);
+    }
+  }
 
   //приватный  метод показа сообщений об ошибке валидации
   _showInputError (inputElement, errorMessage) {

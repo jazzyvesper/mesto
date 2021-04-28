@@ -89,6 +89,7 @@ openPopupBtn.addEventListener('click', () => {
   openPopup(popupEdit);
   addProfileData();
   removeInputError(popupEdit); 
+  new FormValidator(validationConfig, popupEdit).enableValidation();
 });
 
 //отслеживаем клик по крестику и закрываем модальное окно
@@ -99,6 +100,7 @@ openPopupAddCardBtn.addEventListener('click', () => {
   openPopup(popupAddCard);
   removeCardData();
   removeInputError(popupAddCard);
+  new FormValidator(validationConfig, popupAddCard).enableValidation();
 });
 
 //отслеживаем клик по крестику и закрываем модальное окно добавления карточек
@@ -155,6 +157,4 @@ function handleOpenImage (alt, link) {
   openPopup(popupImage);
 }
 // Создаем экземпляр класса FormValidator для каждой проверяемой формы
-new FormValidator(validationConfig, popupEdit).enableValidation();
-new FormValidator(validationConfig, popupAddCard).enableValidation();
 

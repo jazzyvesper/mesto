@@ -16,9 +16,11 @@ export class Card {
   // наполняем содержимым
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.photo-card__image').src = this._link;
-    this._element.querySelector('.photo-card__image').alt = this._alt;
-    this._element.querySelector('.photo-card__title').textContent = this._alt;
+    const photoCardImage = this._element.querySelector('.photo-card__image');
+    const photoCardTitle = this._element.querySelector('.photo-card__title'); 
+    photoCardImage.src = this._link;
+    photoCardImage.alt = this._alt;
+    photoCardTitle.textContent = this._alt;
     this._setEventListeners();
     return this._element;
   }

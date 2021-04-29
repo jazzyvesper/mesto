@@ -6,13 +6,9 @@ import {validationConfig} from './FormValidator.js';
 //Находим Popup и его элементы в DOM
 const popupEdit = document.querySelector('.popup_type_edit');
 const openPopupBtn = document.querySelector('.profile__edit-button');
-const closePopupBtn = popupEdit.querySelector('.popup__close');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupImage = document.querySelector('.popup_type_image');
-const closePopupImageBtn = popupImage.querySelector('.popup__close');
 const openPopupAddCardBtn = document.querySelector('.profile__add-button');
-const closePopupAddCardBtn = popupAddCard.querySelector('.popup__close');
-
 // Находим изображение и подпись 
 const imageElement = popupImage.querySelector('.popup__image');
 const imageCaption = popupImage.querySelector('.popup__caption');
@@ -34,7 +30,6 @@ function openPopup(modal) {
   modal.classList.add('popup_opened');
   //добавление слушателя при нажатии на клавиатуру  
   document.addEventListener ('keydown', keyHandler);
-  document.addEventListener ('click', overlayHandler);
 }
 
 //Функция заполнения полей данными из профиля
@@ -45,19 +40,15 @@ function addProfileData() {
 
 //Функция очистки полей добавления карточек
 function removeCardData() {
-  photoInput.value = "";
-  placeInput.value = "";
+  addformElement.reset();
 }
 
 // функция закрытия модального окна
 function closePopup(modal) {
   modal.classList.remove('popup_opened');
-
   //отслеживаем событие клика и запускаем фунцкцию обработчик
   document.removeEventListener ('keydown', keyHandler);
-  document.removeEventListener ('click', overlayHandler);
 }
-
 
 //функция закрытия модального окна при нажатии на Escape
 function keyHandler (evt){
@@ -67,13 +58,18 @@ function keyHandler (evt){
   }
 }
 
-//закрытие модального окна при клике на оверлэй
-function overlayHandler(evt) {
-  if (evt.target.classList.contains('popup')) {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
+//функция закрытия модального окна при клике на крестик или оверлэй
+function closePopupClick(modal) {
+  modal.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(modal);
+    }
+  });
 }
+//Вызываем функцию закрытия модальных окон при клике на крестик или оверлэй
+closePopupClick (popupEdit);
+closePopupClick (popupAddCard);
+closePopupClick (popupImage);
 
 //функция удаления ошибок
 function removeInputError(formElement) {
@@ -92,9 +88,6 @@ openPopupBtn.addEventListener('click', () => {
   new FormValidator(validationConfig, popupEdit).enableValidation();
 });
 
-//отслеживаем клик по крестику и закрываем модальное окно
-closePopupBtn.addEventListener('click', () => closePopup(popupEdit));
-
 //отслеживаем клик по добавлению карточек и открываем модальное окно
 openPopupAddCardBtn.addEventListener('click', () => {
   openPopup(popupAddCard);
@@ -102,12 +95,6 @@ openPopupAddCardBtn.addEventListener('click', () => {
   removeInputError(popupAddCard);
   new FormValidator(validationConfig, popupAddCard).enableValidation();
 });
-
-//отслеживаем клик по крестику и закрываем модальное окно добавления карточек
-closePopupAddCardBtn.addEventListener('click', () => closePopup(popupAddCard));
-
-//отслеживаем клик по крестику и закрываем модальное окно изображения 
-closePopupImageBtn.addEventListener('click', () => closePopup(popupImage));
 
 //Изменение данных в профиле
 function formEditProfleSubmitHandler (evt) {
@@ -156,5 +143,3 @@ function handleOpenImage (alt, link) {
   imageCaption.textContent = alt;
   openPopup(popupImage);
 }
-// Создаем экземпляр класса FormValidator для каждой проверяемой формы
-

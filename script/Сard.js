@@ -1,5 +1,3 @@
-//import handleOpenImage from './index.js'
-
 export class Card {
   constructor(cardData, cardSelector, handleCardClick) {
     this._link = cardData.link;

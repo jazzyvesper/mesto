@@ -1,5 +1,4 @@
 import {Popup} from './Popup.js';
-
 export class PopupWithForm extends Popup {
   constructor({formSelector, submitHandler}) {
     super(formSelector);
@@ -15,25 +14,22 @@ export class PopupWithForm extends Popup {
 
   // добавляем в этот объект значения всех полей
   this._inputList.forEach(input => this._formValues[input.name] = input.value);
-
-  // возвращаем объект значений
+    
   return this._formValues;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    
     this._popupForm.addEventListener('submit', (evt)=> {
       evt.preventDefault();
-      this.close();
       this._submitHandler(this._getInputValues());
+      this.close();
     });
   }
 
   close() {
     this._popupForm.reset();
     super.close();
-    
   }
 
 }

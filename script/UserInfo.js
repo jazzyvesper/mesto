@@ -1,9 +1,8 @@
 import {popupEdit} from './constants.js' ; 
-
 export class UserInfo {
   constructor({nameSelector, jobSelector}) {
-    this._name =  document.querySelector(nameSelector);
-    this._job = document.querySelector(jobSelector);;
+    this._name =  nameSelector;
+    this._job = jobSelector;
     //console.log(this._name,this._job)
     this._nameInput = popupEdit.querySelector('.popup__item_type_name');
     this._jobInput = popupEdit.querySelector('.popup__item_type_profession');

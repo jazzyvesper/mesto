@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 export class Card {
   constructor(cardData, cardSelector, handleOpenImage) {
+=======
+//import handleOpenImage from './index.js'
+
+export class Card {
+  constructor(cardData, cardSelector, handleCardClick) {
+>>>>>>> develop
     this._link = cardData.link;
     this._alt = cardData.name
     this._cardSelector = cardSelector;
-    this._handleOpenImage = handleOpenImage;
+    this._handleCardClick = handleCardClick;
   }
 
   // Генерация карточек
@@ -34,7 +41,7 @@ export class Card {
     })
 
     this._element.querySelector('.photo-card__image').addEventListener('click', ()=>{
-        this._handleOpenImage(this._alt, this._link); 
+        this._handleCardClick(); 
     })   
   }
 

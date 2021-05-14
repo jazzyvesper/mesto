@@ -17,21 +17,22 @@ import {Section} from './Section.js';
 /*//Добавление карточек на страницу
 const AddCardSubmitHandler = new Section({data: popupCardValue, renderer: (item) => {
   const card = new Card(item, '#photo-card', ()=> {PopupCardImage.open(item.link, item.name)});
-  const popupCardValue = {
-    name: placeInput.value,
-    link: photoInput.value
-   };
+  
   const photoElement = card.generateCard();
   formAddCardSubmitHandler.addItem(photoElement);
 }},'.photo-grid');*/
 
-const PopupFormAddCard = new PopupWithForm({formSelector: popupAddCard, 
-  submitHandler: (formValues) => {
-  const card = new Card(item, '#photo-card', ()=> {PopupCardImage.open(item.link, item.name)});
-  const photoElement = card.generateCard();
-  cardList.addItem(photoElement);}
+const PopupFormAddCard = new PopupWithForm({formSelector: popupAddCard, submitHandler: (formValues) => {
+  const cardAdd = new Section({data: [formValues], renderer: (item) => {
+    const card = new Card(item, '#photo-card', ()=> {PopupCardImage.open(item.link, item.name)});
+    const photoElement = card.generateCard();
+    cardAdd.addItem(photoElement);
+  }},'.photo-grid');
+  cardAdd.renderCard();}
+  
 })
 
+//Добавляет данные редактирования профиля
 const  PopupFormEdit =  new PopupWithForm({formSelector: popupEdit, 
   submitHandler: (formValues)=>{
     UserInfoProfile.setUserInfo(formValues.name, formValues.job)

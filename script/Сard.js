@@ -1,11 +1,11 @@
-import handleOpenImage from './index.js'
+//import handleOpenImage from './index.js'
 
 export class Card {
-  constructor(cardData, cardSelector) {
+  constructor(cardData, cardSelector, handleCardClick) {
     this._link = cardData.link;
     this._alt = cardData.name
     this._cardSelector = cardSelector;
-    this._handleOpenImage = handleOpenImage;
+    this._handleCardClick = handleCardClick;
   }
 
   // Генерация карточек
@@ -18,9 +18,11 @@ export class Card {
   // наполняем содержимым
   generateCard() {
     this._element = this._getTemplate();
-    this._element.querySelector('.photo-card__image').src = this._link;
-    this._element.querySelector('.photo-card__image').alt = this._alt;
-    this._element.querySelector('.photo-card__title').textContent = this._alt;
+    const photoCardImage = this._element.querySelector('.photo-card__image');
+    const photoCardTitle = this._element.querySelector('.photo-card__title'); 
+    photoCardImage.src = this._link;
+    photoCardImage.alt = this._alt;
+    photoCardTitle.textContent = this._alt;
     this._setEventListeners();
     return this._element;
   }
@@ -34,7 +36,7 @@ export class Card {
     })
 
     this._element.querySelector('.photo-card__image').addEventListener('click', ()=>{
-        this._handleOpenImage(this._alt, this._link); 
+        this._handleCardClick(); 
     })   
   }
 
@@ -45,5 +47,4 @@ export class Card {
   _handleLikeCard() {
     this._element.querySelector('.photo-card__icon_type_like').classList.toggle('photo-card__icon_type_like-active');
   };
-  
 }

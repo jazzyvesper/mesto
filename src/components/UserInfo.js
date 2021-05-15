@@ -1,4 +1,4 @@
-import {popupEdit} from './constants.js' ; 
+import {popupEdit} from '../utils/constants.js' ; 
 export class UserInfo {
   constructor({nameSelector, jobSelector}) {
     this._name =  nameSelector;

@@ -1,12 +1,13 @@
-import {Card} from './Сard.js';
-import {initialCards} from './Initial-Card.js';
-import {FormValidator} from './FormValidator.js';
-import {validationConfig} from './FormValidator.js';
-import {popupEdit, openPopupBtn, popupAddCard,popupImage, openPopupAddCardBtn, profileNameElement, profileJobElement} from './constants.js';
-import {PopupWithImage} from './PopupWithImage.js';
-import {PopupWithForm} from './PopupWithForm.js';
-import {UserInfo} from './UserInfo.js';
-import {Section} from './Section.js';
+import '../pages/index.css'
+import {Card} from '../components/Сard.js';
+import {initialCards} from '../utils/Initial-Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {validationConfig} from '../components/FormValidator.js';
+import {popupEdit, openPopupBtn, popupAddCard,popupImage, openPopupAddCardBtn, profileNameElement, profileJobElement} from '../utils/constants.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {UserInfo} from '../components/UserInfo.js';
+import {Section} from '../components/Section.js';
 
 //Добавляет данные редактирования профиля
 const  PopupFormEdit =  new PopupWithForm({formSelector: popupEdit, 

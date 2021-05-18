@@ -4,9 +4,10 @@ export class Card {
     this._alt = cardData.name
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    
   }
 
-  // Генерация карточек
+  // Генерация карточекthis._element.querySelector('.photo-card__image')
   _getTemplate() {
     // клонируем содержимое тега template
     const photoElement = document.querySelector(this._cardSelector).content.querySelector('.photo-card').cloneNode(true);
@@ -16,10 +17,11 @@ export class Card {
   // наполняем содержимым
   generateCard() {
     this._element = this._getTemplate();
-    const photoCardImage = this._element.querySelector('.photo-card__image');
+    this._likeButton = this._element.querySelector('.photo-card__icon_type_like');
+    this._cardImage = this._element.querySelector('.photo-card__image')
     const photoCardTitle = this._element.querySelector('.photo-card__title'); 
-    photoCardImage.src = this._link;
-    photoCardImage.alt = this._alt;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._alt;
     photoCardTitle.textContent = this._alt;
     this._setEventListeners();
     return this._element;
@@ -29,11 +31,11 @@ export class Card {
     this._element.querySelector('.photo-card__icon_type_basket').addEventListener('click', ()=>{
       this._handleRemoveCard();
     })
-    this._element.querySelector('.photo-card__icon_type_like').addEventListener('click', ()=>{
+    this._likeButton.addEventListener('click', ()=>{
       this._handleLikeCard();
     })
 
-    this._element.querySelector('.photo-card__image').addEventListener('click', ()=>{
+    this._cardImage.addEventListener('click', ()=>{
         this._handleCardClick(); 
     })   
   }
@@ -43,6 +45,6 @@ export class Card {
   };
 
   _handleLikeCard() {
-    this._element.querySelector('.photo-card__icon_type_like').classList.toggle('photo-card__icon_type_like-active');
+    this._likeButton.classList.toggle('photo-card__icon_type_like-active');
   };
 }

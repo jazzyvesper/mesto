@@ -1,17 +1,15 @@
-import {popupEdit} from '../utils/constants.js' ; 
 export class UserInfo {
   constructor({nameSelector, jobSelector}) {
-    this._name =  nameSelector;
-    this._job = jobSelector;
-    //console.log(this._name,this._job)
-    this._nameInput = popupEdit.querySelector('.popup__item_type_name');
-    this._jobInput = popupEdit.querySelector('.popup__item_type_profession');
+    this._name = document.querySelector(nameSelector);
+    this._job = document.querySelector(jobSelector);
   }
 
   //Возвращает объект с данными пользователей
   getUserInfo() {
-    this._nameInput.value = this._name.textContent;
-    this._jobInput.value = this._job.textContent;
+    const dataUserInfo = {};
+    dataUserInfo.name = this._name.textContent;
+    dataUserInfo.job = this._job.textContent;
+    return dataUserInfo;
   }
 
   //Принимает новые данные пользователя и добавляет их на страницу

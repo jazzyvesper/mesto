@@ -5,17 +5,27 @@ export class PopupWithForm extends Popup {
     this._submitHandler = submitHandler;
     this._popupForm = this._popup.querySelector('.popup__form');
     this._inputList = this._popupForm.querySelectorAll('.popup__item');
-    
   }
 
   _getInputValues() {  
-  // создаём пустой объект
-  this._formValues = {};
+    // создаём пустой объект
+    this._formValues = {};
+  
+    // добавляем в этот объект значения всех полей
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+      
+    return this._formValues;
+    }
 
-  // добавляем в этот объект значения всех полей
-  this._inputList.forEach(input => this._formValues[input.name] = input.value);
-    
-  return this._formValues;
+  //Пункт 10. Улучшенный UX всех форм
+  _renderLoading(isLoading) {
+    this._buttonEditSave.forEach((item)=>{
+      if(isLoading) {
+        item.textContent = 'Сохранение...'; 
+      }else {
+        item.textContent = this._buttonEditSave[0].ariaLabel
+     }
+    })
   }
 
   setEventListeners() {

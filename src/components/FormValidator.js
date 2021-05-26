@@ -11,7 +11,7 @@ export class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
     this._formElement = document.querySelector(formElement);
-    this._inputList = this._validationConfig.inputSelector;
+    this._inputSelector = this._validationConfig.inputSelector;
     this._submitButton = this._validationConfig.submitButtonSelector;
     this._form = this._validationConfig.formSelector;
     this._inactiveButton = this._validationConfig.inactiveButtonClass;
@@ -25,25 +25,37 @@ export class FormValidator {
       return !inputElement.validity.valid;
     })
   }
+
+  // метод блокировка кнопки submita
+  _disableButton(buttonElement) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add(this._inactiveButton);
+    buttonElement.classList.remove(this._activeButton);
+  }
+
   // приватный метод слушателя на вводимые дданые
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputList));
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     const buttonElement = this._formElement.querySelector(this._submitButton);
+    
+    //Очистка ошибок и блокировка кнопки Submit при закрытии формы
+    this._formElement.addEventListener('reset', () => {
+      this._disableButton(buttonElement); 
+      inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+      })
+    });
+    
     // Вызовем toggleButtonState, для начальной блокировки кнопки
     this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement)
         this._toggleButtonState(inputList, buttonElement);
-      });
-      this._formElement.addEventListener('reset', () => {    
-        this._hideInputError(inputElement)
-      });
+      }); 
     });
-
   };
 
-  
   //приватный метод блокировки кнопки в зависимости от правилно заполненного поля
   _toggleButtonState (inputList, buttonElement) {
   if (this._hasInvalidInput(inputList)) {
@@ -82,14 +94,11 @@ export class FormValidator {
     }
   };
 
-
   enableValidation () {
     this._formElement.addEventListener('submit', (evt) => {
        evt.preventDefault();
      });
      // Для каждой формы вызовем функцию setEventListeners,передав ей элемент формы
      this._setEventListeners()
-   
- };
-
+    };
 }

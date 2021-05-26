@@ -5,6 +5,7 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
 @import url(../blocks/profile/__image/profile__image.css);
 @import url(../blocks/profile/__text/profile__text.css);
 @import url(../blocks/profile/__column/profile__column.css);
@@ -20,6 +21,9 @@
 @import url(../blocks/photo-card/__icon/photo-card__icon.css);
 @import url(../blocks/photo-card/__icon/_type/photo-card__icon_type_basket.css);
 @import url(../blocks/photo-card/__icon/_type/photo-card__icon_type_like.css);
+@import url(../blocks/photo-card/__icon/_type/photo-card_icon_type_number-like.css);
+@import url(../blocks/photo-card/__icon/_type/photo-card__icon-hidden.css);
+@import url(../blocks/photo-card/__likes/photo-card__likes.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/__close/popup__close.css);

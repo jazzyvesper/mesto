@@ -1,6 +1,5 @@
-import {api} from '../pages/index.js'
 export class Card {
-  constructor(cardData, cardSelector, handleCardClick, submitHandler) {
+  constructor(cardData, cardSelector, handleCardClick, submitHandler, api, currentUser) {
     this._link = cardData.link;
     this._alt = cardData.name;
     this._owner = cardData.owner._id;
@@ -9,7 +8,8 @@ export class Card {
     this._like = cardData.likes;
     this._id = cardData._id;
     this._submitHandler = submitHandler;
-    this._myId = 'e51a84f9f3908d88538ad3fa';
+    this._myId = currentUser
+    this._api = api;
   }
 
   // Генерация карточек
@@ -53,55 +53,30 @@ export class Card {
   //8. Постановка и снятие лайка
   _settingLikes() {
     const activeButton = this._likeButton.classList.contains('photo-card__icon_type_like-active')
-    if(activeButton) {
-      api.addLikes(this.getId())
-      .then((res)=> {
-        if(res.ok) {
-          return res.json()
-        }else {
-          return Promise.reject(res.status)
-        } 
-      })
+    if(!activeButton) {
+      this._api.addLikes(this.getId())
       .then((res)=> {
         const pluslikes = res.likes.length ++;
         this._quantityLikes.textContent = pluslikes;
+        this._handleLikeCard()
       })
       .catch(err => console.log(`Ошибка при добавлении лайка: ${err}`))
     }else {
-      api.deleteLikes(this.getId())
-      .then((res)=> {
-        if(res.ok) {
-         return res.json()
-        }else {
-          return Promise.reject(res.status)
-        } 
-      })
+      this._api.deleteLikes(this.getId())
       .then((res)=> {
         this._quantityLikes.textContent =  res.likes.length;
+        this._handleLikeCard()
       })
       .catch(err => console.log(`Ошибка при удалении лайка: ${err}`))
     } 
   }
 
-  handleCardDelete() {
-    api.deleteCard(this.getId())
-    .then(result => {
-      if (result.ok) {
-        return result.json()
-      } else {
-        console.log(`Ошибка: ${result.status}`)
-        }
-      })
-   .catch(err => console.log(`Ошибка при удалении карточки: ${err}`))
-  }
-
-    _setEventListeners() {
+  _setEventListeners() {
     this._element.querySelector('.photo-card__icon_type_basket').addEventListener('click', ()=>{
       this._submitHandler()
     })
 
     this._likeButton.addEventListener('click', ()=>{
-      this._handleLikeCard();
       this._settingLikes()
     })
 

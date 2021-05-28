@@ -11,7 +11,8 @@ export const nameInput = document.querySelector('.popup__item_type_name');
 export const jobInput = document.querySelector('.popup__item_type_profession');
 export const profileNameElement = '.profile__title';
 export const profileJobElement = '.profile__subtitle';
-export const profileAvatar = '.profile__image'
+export const profileAvatar = '.profile__image';
+
 
 //Добавление карточек на страницу
 export const photoGrid = document.querySelector('.photo-grid');

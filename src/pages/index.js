@@ -16,7 +16,7 @@ export const api = new Api({
   token: '35787694-4746-4a15-83d0-360cc3763119',
 }); 
 
-const userInfoProfile = new UserInfo({nameSelector: profileNameElement, jobSelector: profileJobElement});
+const userInfoProfile = new UserInfo({nameSelector: profileNameElement, jobSelector: profileJobElement, avatarSelector: profileAvatar});
 const popupCardImage = new PopupWithImage(popupImage);
 new FormValidator(validationConfig, popupEdit).enableValidation();
 new FormValidator(validationConfig, popupAddCard).enableValidation();
@@ -31,35 +31,25 @@ const cardItem = new Section({data: initialCards, renderer: (item) => {
   cardItem.addItem(createCard(item));
 }},'.photo-grid');
 
-//Пункт 2. Загрузка карточек с сервера
-api.getCards()
-  .then((res)=> {
-    if(res.ok) {
-      return res.json()
-    }else {
-      return Promise.reject(res.status)
-    } 
+//Пункт 1 и 2. Загрузка карточек и данных профиля с сервера
+Promise.all([api.getinfo(), api.getCards()])
+  .then(([userData, cardlist]) => {
+      userInfoProfile.setUserAvatar(userData);
+      userInfoProfile.setUserInfo(userData);
+      cardItem.renderCard(cardlist);
   })
-  .then((res)=> {
-    cardItem.renderCard(res);
-  })
-  .catch(err => console.log(`Ошибка при загрузке карточек: ${err}`))
+  .catch(err => console.log(`Ошибка при загрузке профиля: ${err}`))
+
 
 //Пункт 4. Добавление новой карточки
 const popupFormAddCard = new PopupWithForm({popupSelector: popupAddCard, submitHandler: (formValues) => {
   api.createNewCard(formValues)
-    .then((res)=> {
-      if(res.ok) {
-      return res.json()
-    }else {
-      return Promise.reject(res.status)
-    } 
-    })
-    .then((res)=> {
-      cardItem.addItem(createCard(res));
-    })
-      .catch(err => console.log(`Ошибка при добавлении карточки: ${err}`))
-  }
+  .then((res)=> {
+    cardItem.addItem(createCard(res));
+    popupFormAddCard.close();
+  })
+  .catch(err => console.log(`Ошибка при добавлении карточки: ${err}`))
+}
 })
 
 //Пункт 3. Редактирование профиля
@@ -67,43 +57,24 @@ const  popupFormEdit =  new PopupWithForm({popupSelector: popupEdit,
   submitHandler: (formValues)=>{
     api.changeInfo(formValues)
     .then((res)=> {
-    if(res.ok) {
-     return res.json()
-    }else {
-    return Promise.reject(res.status)
-    } 
-    })
-    .then((res)=> {
-      userInfoProfile.setUserInfo(res.name, res.about)
+      userInfoProfile.setUserInfo(res, res)
+      popupFormEdit.close();
     })
     .catch(err => console.log(`Ошибка при сохранении информации: ${err}`))
-  }
-});
-
-//Пункт 1. Загрузка информации о пользователе с сервера
-api.getinfo()
-  .then((res)=> {
-    if(res.ok) {
-      return res.json()
-    }else {
-      return Promise.reject(res.status)
-    } 
-  })
-  .then((res)=> {
-    document.querySelector(profileNameElement).textContent = res.name
-    document.querySelector(profileJobElement).textContent = res.about
-    document.querySelector(profileAvatar).src = res.avatar
-  })
-  .catch(err => console.log(`Ошибка при загрузки данных профиля: ${err}`))
+}});
 
 // Генерация карточки 
 function createCard (item) {
   const card = new Card(item, '#photo-card', ()=> {popupCardImage.open(item.link, item.name)}, ()=> {
     popupDeleteCard.open(()=> {
-      card.handleRemoveCard();
-      card.handleCardDelete()
+      api.deleteCard(card.getId())
+      .then(() => {
+        card.handleRemoveCard();
+        popupDeleteCard.close();
+      })
+      .catch(e => console.log('Ошибка при удалении карточки'))
     })
-  })
+  }, api, userInfoProfile.getUserId())
   const photoElement = card.generateCard();
   return photoElement;
 }
@@ -111,18 +82,12 @@ function createCard (item) {
 //Пункт 9. Обновление аватара пользователя
 const popupFormEditAvatar = new PopupWithForm({popupSelector:popupChangeAvatar, submitHandler: (formValues)=> {
   api.changeAvatar(formValues)
-    .then((res)=> {
-      if(res.ok) {
-        return res.json()
-      }else {
-        return Promise.reject(res.status)
-      } 
-    })
-    .then((res)=> {
-      document.querySelector(profileAvatar).src = res.avatar
-    })
-    .catch(err => console.log(`Ошибка при обновлении фотографии: ${err}`))
-  }
+  .then((res)=> {
+    userInfoProfile.setUserAvatar(res);
+    popupFormEditAvatar.close();
+  })
+  .catch(err => console.log(`Ошибка при обновлении фотографии: ${err}`))
+ }
 });
 
 popupFormEdit.setEventListeners();

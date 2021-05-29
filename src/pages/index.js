@@ -43,24 +43,32 @@ Promise.all([api.getinfo(), api.getCards()])
 
 //Пункт 4. Добавление новой карточки
 const popupFormAddCard = new PopupWithForm({popupSelector: popupAddCard, submitHandler: (formValues) => {
+  popupFormAddCard.renderLoading(true);
   api.createNewCard(formValues)
   .then((res)=> {
     cardItem.addItem(createCard(res));
     popupFormAddCard.close();
   })
   .catch(err => console.log(`Ошибка при добавлении карточки: ${err}`))
+  .finally(() => {
+    popupFormAddCard.renderLoading(false);
+  })
 }
 })
 
 //Пункт 3. Редактирование профиля
 const  popupFormEdit =  new PopupWithForm({popupSelector: popupEdit, 
   submitHandler: (formValues)=>{
+    popupFormEdit.renderLoading(true);
     api.changeInfo(formValues)
     .then((res)=> {
       userInfoProfile.setUserInfo(res, res)
       popupFormEdit.close();
     })
     .catch(err => console.log(`Ошибка при сохранении информации: ${err}`))
+    .finally(() => {
+      popupFormEdit.renderLoading(false);
+    })
 }});
 
 // Генерация карточки 
@@ -81,12 +89,16 @@ function createCard (item) {
 
 //Пункт 9. Обновление аватара пользователя
 const popupFormEditAvatar = new PopupWithForm({popupSelector:popupChangeAvatar, submitHandler: (formValues)=> {
+  popupFormEditAvatar.renderLoading(true);
   api.changeAvatar(formValues)
   .then((res)=> {
     userInfoProfile.setUserAvatar(res);
     popupFormEditAvatar.close();
   })
   .catch(err => console.log(`Ошибка при обновлении фотографии: ${err}`))
+  .finally(() => {
+    popupFormEditAvatar.renderLoading(false);
+  })
  }
 });
 

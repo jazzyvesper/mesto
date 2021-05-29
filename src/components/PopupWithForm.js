@@ -19,7 +19,7 @@ export class PopupWithForm extends Popup {
     }
 
  //Пункт 10. Улучшенный UX всех форм
-  renderLoading(isLoading) {
+ renderLoading(isLoading) {
     if(isLoading) {
       this._buttonEditSave.textContent = 'Сохранение...'; 
     }else {
@@ -31,7 +31,6 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener('submit', (evt)=> {
       evt.preventDefault();
-      this.renderLoading(true)
       this._submitHandler(this._getInputValues());
     });
   }
@@ -39,6 +38,5 @@ export class PopupWithForm extends Popup {
   close() {
     this._popupForm.reset();
     super.close();
-    this.renderLoading(false)
   }
 }
